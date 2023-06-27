@@ -1,0 +1,114 @@
+###PMF Plots
+rm(list=ls())
+PXL=function(par,x){
+beta=par[1]
+(beta*((1+beta)^(-2-x))*(-beta*(1+x)+log(beta)*(1+beta)))/(-1+log(beta))
+}
+
+par(mfrow=c(2,3), mai = c(0.6, 0.6, 0.4, 0.4))
+x = 0:15
+plot(x, PXL(c(0.1),x), type="h", lwd=1, col="blue",ylab="p(x)",main="")
+legend("topright",legend=c(expression(paste(beta," = 0.1 "))),
+lwd=1,cex=1.2,lty=c(1), col=c("blue"),bty="n")
+points(x, PXL(c(0.1),x),pch=16,cex=1,col="red")
+
+x = 0:15
+plot(x, PXL(c(0.5),x), type="h", lwd=1, col="blue", ylab="p(x)",main="")
+legend("topright",legend=c(expression(paste(beta," = 0.5 "))),
+lwd=1,cex=1.2,lty=c(1), col=c("blue"),bty="n")
+points(x, PXL(c(0.5),x),pch=16,cex=1,col="red")
+
+x = 0:15
+plot(x, PXL(c(0.8),x), type="h", lwd=1, col="blue", ylab="p(x)",main="")
+legend("topright",legend=c(expression(paste(beta," = 0.8 "))),
+lwd=1,cex=1.2,lty=c(1), col=c("blue"),bty="n")
+points(x, PXL(c(0.8),x),pch=16,cex=1,col="red")
+
+x = 0:15
+plot(x, PXL(c(0.9),x), type="h", lwd=1, col="blue", ylab="p(x)",main="")
+legend("topright",legend=c(expression(paste(beta," = 0.9 "))),
+lwd=1,cex=1.2,lty=c(1), col=c("blue"),bty="n")
+points(x, PXL(c(0.9),x),pch=16,cex=1,col="red")
+
+x = 0:15
+plot(x, PXL(c(1.5),x), type="h", lwd=1, col="blue", ylab="p(x)",main="")
+legend("topright",legend=c(expression(paste(beta," = 1.5 "))),
+lwd=1,cex=1.2,lty=c(1), col=c("blue"),bty="n")
+points(x, PXL(c(1.5),x),pch=16,cex=1,col="red")
+
+x = 0:15
+plot(x, PXL(c(1.8),x), type="h", lwd=1, col="blue", ylab="p(x)",main="")
+legend("topright",legend=c(expression(paste(beta," = 1.8 "))),
+lwd=1,cex=1.2,lty=c(1), col=c("blue"),bty="n")
+points(x, PXL(c(1.8),x),pch=16,cex=1,col="red")
+
+############## HRF Plots ############################
+rm(list=ls())
+PXL=function(par,x){
+beta=par[1]
+f<- (beta*((1+beta)^(-2-x))*(-beta*(1+x)+log(beta)*(1+beta)))/(-1+log(beta))
+S<- 1-(1+(((1+beta)^(-2-x))*(1+beta*(2+x)-log(beta)*(1+beta)))/(-1+log(beta)))
+hrf<- f/S
+return(hrf)
+}
+
+par(mfrow=c(2,3), mai = c(0.6, 0.6, 0.4, 0.4))
+x = 0:15
+plot(x, PXL(c(0.1),x), type="h", lwd=1, col="blue",ylab="h(x)",main="")
+legend("topleft",legend=c(expression(paste(beta," = 0.1 "))),
+lwd=1,cex=1.2,lty=c(1), col=c("blue"),bty="n")
+points(x, PXL(c(0.1),x),pch=16,cex=1,col="red")
+
+x = 0:15
+plot(x, PXL(c(0.5),x), type="h", lwd=1, col="blue", ylab="h(x)",main="")
+legend("topleft",legend=c(expression(paste(beta," = 0.5 "))),
+lwd=1,cex=1.2,lty=c(1), col=c("blue"),bty="n")
+points(x, PXL(c(0.5),x),pch=16,cex=1,col="red")
+
+x = 0:15
+plot(x, PXL(c(0.8),x), type="h", lwd=1, col="blue", ylab="h(x)",main="")
+legend("topleft",legend=c(expression(paste(beta," = 0.8 "))),
+lwd=1,cex=1.2,lty=c(1), col=c("blue"),bty="n")
+points(x, PXL(c(0.8),x),pch=16,cex=1,col="red")
+
+x = 0:15
+plot(x, PXL(c(0.9),x), type="h", lwd=1, col="blue", ylab="h(x)",main="")
+legend("topleft",legend=c(expression(paste(beta," = 0.9 "))),
+lwd=1,cex=1.2,lty=c(1), col=c("blue"),bty="n")
+points(x, PXL(c(0.9),x),pch=16,cex=1,col="red")
+
+x = 0:15
+plot(x, PXL(c(1.5),x), type="h", lwd=1, col="blue", ylab="h(x)",main="")
+legend("topleft",legend=c(expression(paste(beta," = 1.5 "))),
+lwd=1,cex=1.2,lty=c(1), col=c("blue"),bty="n")
+points(x, PXL(c(1.5),x),pch=16,cex=1,col="red")
+
+x = 0:15
+plot(x, PXL(c(1.8),x), type="h", lwd=1, col="blue", ylab="h(x)",main="")
+legend("topleft",legend=c(expression(paste(beta," = 1.8 "))),
+lwd=1,cex=1.2,lty=c(1), col=c("blue"),bty="n")
+points(x, PXL(c(1.8),x),pch=16,cex=1,col="red")
+
+########### Application #######################
+rm(list=ls())
+library(maxLik)
+t<- c(8,16,15,24,26,26,38,43,46,45,57,64,65,73,73,86,89,97,108,97,146,121,143,142,105,98,136,114,118,
+109,97,150,71,52,29,44,47,35,42,31,38,31,30,28,27,22,17,22,11,7,13,10,14,13,11,8,3,7,6,9,7,4,6,5,3,5)
+n<- length(t)
+K<- 1
+#==========================================================
+########## PEBWE ######## #############
+#==========================================================
+log.PEBWE<- function(parms){
+beta <- parms[1]
+ft<- (beta*((1+beta)^(-2-t))*(-beta*(1+t)+log(beta)*(1+beta)))/(-1+log(beta))
+like<- (ft)
+L <- sum(log(like))
+if (is.na(L)==TRUE){
+return(-Inf)} 
+else
+{return(L)}
+}
+mle_PEBWE<- c()
+mle_PEBWE<- maxLik(logLik=log.PEBWE,start=c(0.04017))
+summary(mle_PEBWE)
